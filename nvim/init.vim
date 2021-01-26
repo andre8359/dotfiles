@@ -1,76 +1,82 @@
-call plug#begin('~/.local/share/nvim/plugged')
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
+call plug#begin('~/.vim/bundle')
+Plug 'neovim/nvim-lsp'
+Plug 'nvim-lua/completion-nvim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'rhysd/vim-clang-format'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree'
+Plug 'ap/vim-buftabline'
 Plug 'vim-airline/vim-airline'
 Plug 'mindriot101/vim-yapf'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+"Plug 'wikitopian/hardmode'
 call plug#end()
 
-let g:deoplete#enable_at_startup = 1
 
-"-------------------
-"UTF8 compatibilty
-"-------------------
-set enc=utf-8
-set fenc=utf-8
-set termencoding=utf-8
-set nocompatible
-
-"-------------------
-"indentation
-"-------------------
-set autoindent
-set smartindent
-
-"-------------------
-"Tabulation
-"-------------------
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set textwidth=80
-
-"-------------------
-"Nice stuff
-"-------------------
-set incsearch
-set cc=80
-syntax enable
-set number
-set listchars+=space:·
-set list
-set showmatch
-set t_Co=256
-set comments=sl:/*,mb:\ *,elx:\ */
-set cino=:0,:(0
-set path+=** " busca recursiva em subdiretorios
-set background=dark
-set laststatus=2
-set backup
-set noundofile
-set nobackup " do not keep a backup file (ending in ~)
-set noswapfile " do not write a swap file
-set hlsearch
-set visualbell
-set t_vb=
-colorscheme elflord
 autocmd FileType gitcommit set cc=72
+autocmd FileType cpp  setlocal cc=160
 autocmd FileType make,automake set noexpandtab shiftwidth=8 softtabstop=8
 highlight ExtraWhitespace ctermbg=blue guibg=blue
 match ExtraWhitespace /\s\+\%#\@<!$/
+highlight Pmenu ctermbg=gray guibg=gray
 
+let g:PaperColor_Theme_Options = {
+  \   'language': {
+  \     'python': {
+  \       'highlight_builtins' : 1
+  \     },
+  \     'cpp': {
+  \       'highlight_standard_library': 1
+  \     },
+  \     'c': {
+  \       'highlight_builtins' : 1
+  \     }
+  \   }
+  \ }
 
-"-------------------
-"Python
-"-------------------
-let g:yapf_style = "pep8"
+let g:NERDTreeMouseMode=3
+
 
 "-------------------
 "Maps
 "-------------------
-"nmap <F2> :w<CR>
-"imap <F2> <ESC>:w<CR>i
-map <F7> :NERDTreeToggle<CR>
-map <F12> <C-]><CR>
-map <C-S-a> :call Yapf(" --style pep8")<CR> 
+nnoremap <F4> :CocCommand clangd.switchSourceHeader<CR>
+nnoremap <F6> :TagbarToggle<CR>
+nnoremap <F7> :NERDTreeToggle<CR>
+nnoremap <leader>f :ClangFormat<CR>
+nnoremap <C-c> "+y
+nnoremap <C-M> :bnext<CR>
+nnoremap <C-K> :bprev<CR>
+nnoremap <leader>q :Bdelete<CR>
 
+
+"-------------------
+"C++
+"-------------------
+autocmd FileType cpp setlocal commentstring=//\ %s
+
+"-------------------
+"Python
+"-------------------
+let pyhon_highlight_all=1
+autocmd FileType python nnoremap <leader>y :call Yapf(" --style pep8")<cr>
+let highlight_builtins=1
+
+"--------------------
+" Find files using Telescope command-line sugar.
+"--------------------
+let mapleader = " "
+nnoremap <leader>tf <cmd>Telescope find_files<cr>
+nnoremap <leader>tg <cmd>Telescope live_grep<cr>
+nnoremap <leader>tb <cmd>Telescope buffers<cr>
+nnoremap <leader>th <cmd>Telescope help_tags<cr>
+
+
+"Hardmode stuff
+let g:HardMode_level = 'wannabe'
+let g:HardMode_hardmodeMsg = 'Don''t use this!'
+autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
