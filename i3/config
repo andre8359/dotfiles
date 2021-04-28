@@ -2,9 +2,10 @@
 exec --no-startup-id sh .screenlayout/default.sh
 exec feh --bg-scale --randomize /home/andre/Wallpaper/*
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec compton -b
+#exec compton -b
 exec --no-startup-id conky -c ~/.config/conky
-exec --no-startup-id conky -c ~/.config/conky_shortcuts exec --no-startup-id conky -c ~/.config/conky_cal # SUPER windowskey set $mod Mod4
+exec --no-startup-id conky -c ~/.config/conky_shortcuts exec --no-startup-id conky -c ~/.config/conky_cal 
+
 exec --no-startup-id nm-applet
 
 for_window [class="^.*"] border pixel 1
