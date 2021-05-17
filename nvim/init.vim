@@ -10,7 +10,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'ap/vim-buftabline'
 Plug 'vim-airline/vim-airline'
 Plug 'mindriot101/vim-yapf'
-Plug 'NLKNguyen/papercolor-theme'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -18,6 +17,7 @@ Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'voldikss/vim-floaterm'
 Plug 'wikitopian/hardmode'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'morhetz/gruvbox'
 call plug#end()
 
 autocmd FileType gitcommit set cc=72
@@ -27,20 +27,6 @@ highlight ExtraWhitespace ctermbg=blue guibg=blue
 match ExtraWhitespace /\s\+\%#\@<!$/
 
 highlight Pmenu ctermbg=gray guibg=gray
-
-let g:PaperColor_Theme_Options = {
-  \   'language': {
-  \     'python': {
-  \       'highlight_builtins' : 1
-  \     },
-  \     'cpp': {
-  \       'highlight_standard_library': 1
-  \     },
-  \     'c': {
-  \       'highlight_builtins' : 1
-  \     }
-  \   }
-  \ }
 
 let g:NERDTreeMouseMode=3
 

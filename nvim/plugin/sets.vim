@@ -39,8 +39,8 @@ set number
 set list
 set showmatch
 set t_Co=256
-set background=dark
-"colorscheme PaperColor
+set background=light
+colorscheme gruvbox
 let g:lightline = { 'colorscheme': 'PaperColor' }
 set comments=sl:/*,mb:\ *,elx:\ */
 set cino=:0,:(0
