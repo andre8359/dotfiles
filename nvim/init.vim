@@ -13,6 +13,8 @@ Plug 'mindriot101/vim-yapf'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'voldikss/vim-floaterm'
 Plug 'wikitopian/hardmode'
@@ -46,15 +48,8 @@ tnoremap <silent> <leader>t <C-\><C-n>:FloatermToggle<CR>
 nnoremap <silent> <leader>nt :FloatermNew --height=0.6 --width=0.9 <CR>
 tnoremap <silent> <leader>n <C-\><C-n>:FloatermNext<CR>
 tnoremap <silent> <leader>p <C-\><C-n>:FloatermPrev<CR>
-
-"--------------------
-" Find files using Telescope command-line sugar.
-"--------------------
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fs <cmd> :lua require('telescope.builtin').find_files( { cwd='~/sdp/svc/' } )<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+vnoremap < <gv
+vnoremap > >gv
 
 "-------------------
 "C++
@@ -65,6 +60,7 @@ autocmd FileType cpp setlocal commentstring=//\ %s
 "Python
 "-------------------
 let pyhon_highlight_all=1
+let g:python3_host_prog='/home/andre/env/bin/python3'
 autocmd FileType python nnoremap <leader>y :call Yapf(" --style pep8")<cr>
 let highlight_builtins=1
 "Hardmode stuff
