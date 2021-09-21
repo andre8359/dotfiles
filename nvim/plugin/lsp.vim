@@ -18,33 +18,26 @@
    on_attach = on_attach,
    cmd = {
       'clangd',
+      '--all-scopes-completion',
       '--background-index',
       '--clang-tidy',
-      '--header-insertion=never',
-      '--suggest-missing-includes',
-      '--compile_args_from=filesystem',
-      '--all-scopes-completion',
-      '--completion-parse=always',
       '--completion-style=detailed',
       '--cross-file-rename',
-      '--function-arg-placeholders',
-      '--header-insertion-decorators',
-      '--query-driver=/usr/bin/**/clang-*',
-      '--limit-results=0',
+      '--header-insertion=never',
       '-j=6',
+      '--malloc-trim',
       '--pch-storage=memory'
    }
  }
-
-  local servers = {'jsonls', 'pyls', 'vimls', 'cmake'}
-
-  for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-      on_attach = on_attach,
-    }
-  end
 EOF
 
+ " local servers = {'jsonls', 'pyls', 'vimls', 'cmake'}
+
+ " for _, lsp in ipairs(servers) do
+ "  nvim_lsp[lsp].setup {
+ "    on_attach = on_attach,
+ "  }
+ " end
 
 "----------------------
 " Completion options

@@ -50,6 +50,8 @@ tnoremap <silent> <leader>n <C-\><C-n>:FloatermNext<CR>
 tnoremap <silent> <leader>p <C-\><C-n>:FloatermPrev<CR>
 vnoremap < <gv
 vnoremap > >gv
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 "-------------------
 "C++
