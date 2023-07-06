@@ -20,6 +20,7 @@ Plug 'voldikss/vim-floaterm'
 Plug 'wikitopian/hardmode'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'morhetz/gruvbox'
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 autocmd FileType gitcommit set cc=72
