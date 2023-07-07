@@ -29,15 +29,26 @@
       '--pch-storage=memory'
    }
  }
+
+  nvim_lsp['rust_analyzer'].setup {
+   on_attach = on_attach,
+   cmd = {'rust-analyzer'},
+   diagnostics = {
+        enable = false;
+      }
+   }
+
+
+local servers = {'pylsp', 'cmake'}
+
+for _, lsp in pairs(servers) do
+   nvim_lsp[lsp].setup {
+      on_attach = on_attach,
+   }
+end
+
 EOF
 
- " local servers = {'jsonls', 'pyls', 'vimls', 'cmake'}
-
- " for _, lsp in ipairs(servers) do
- "  nvim_lsp[lsp].setup {
- "    on_attach = on_attach,
- "  }
- " end
 
 "----------------------
 " Completion options
