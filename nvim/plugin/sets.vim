@@ -36,6 +36,7 @@ set cc=120
 syntax enable
 set relativenumber
 set number
+set lcs+=space:·
 set list
 set showmatch
 set t_Co=256

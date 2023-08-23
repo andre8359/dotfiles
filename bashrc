@@ -36,7 +36,7 @@ SMILEY="${WHITE}:)${NORMAL}"
 FROWNY="${RED}:(${NORMAL}"
 SELECT="if [ \$? = 0 ]; then echo \"${SMILEY}\"; else echo \"${FROWNY}\"; fi"
 
-PS1="${RESET}[${RED}\u${NORMAL}@${RED}ABELHA2615${NORMAL}] \W ${YELLOW}(\$(git branch 2>/dev/null | grep '^*' | colrm 1 2))${NORMAL} \` ${SELECT}\` \$ "
+PS1="${RESET}[${RED}\u${NORMAL}@${RED}\H${NORMAL}] \W ${YELLOW}(\$(git branch 2>/dev/null | grep '^*' | colrm 1 2))${NORMAL} \` ${SELECT}\` \$ "
 
-
+export PATH=${PATH}:/usr/local/bin
 source ~/env/bin/activate

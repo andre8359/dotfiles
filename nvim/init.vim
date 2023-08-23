@@ -1,6 +1,12 @@
 call plug#begin('~/.vim/bundle')
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'rhysd/vim-clang-format'
@@ -41,7 +47,7 @@ nnoremap <F6> :TagbarToggle<CR>
 nnoremap <F7> :NERDTreeToggle<CR>
 nnoremap <leader>f :ClangFormat<CR>
 nnoremap <C-c> "+y
-nnoremap <C-M> :bnext<CR>
+nnoremap <C-L> :bnext<CR>
 nnoremap <C-K> :bprev<CR>
 nnoremap <leader>q :bdelete<CR>
 nnoremap <silent> <leader>t :FloatermToggle<CR>

@@ -1,7 +1,6 @@
 :lua << EOF
   local nvim_lsp = require('lspconfig')
   local on_attach = function(_, bufnr)
-    require('completion').on_attach()
     local opts = { noremap=true, silent=true }
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -14,6 +13,36 @@
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>d', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F4>', '<cmd>ClangdSwitchSourceHeader<CR>', opts)
   end
+
+  local cmp = require('cmp')
+
+  cmp.setup({
+      snippet = {
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+      end,
+      },
+     window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+        },
+        mapping = cmp.mapping.preset.insert({
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-a>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        }),
+        sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'vsnip' }, -- For vsnip users.
+        }, {
+           { name = 'buffer' },
+        })
+        })
+
+  local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
   nvim_lsp['clangd'].setup {
    on_attach = on_attach,
    cmd = {
@@ -23,11 +52,13 @@
       '--clang-tidy',
       '--completion-style=detailed',
       '--cross-file-rename',
-      '--header-insertion=never',
-      '-j=6',
+      '--header-insertion=iwyu',
+      '-j=8',
       '--malloc-trim',
-      '--pch-storage=memory'
-   }
+      '--pch-storage=memory',
+      '--compile-commands-dir=/home/adantas/Documents/svc/build'
+   },
+   capabilities = capabilities
  }
 
   nvim_lsp['rust_analyzer'].setup {
@@ -48,7 +79,6 @@ for _, lsp in pairs(servers) do
 end
 
 EOF
-
 
 "----------------------
 " Completion options
