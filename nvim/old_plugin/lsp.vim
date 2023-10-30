@@ -14,6 +14,7 @@
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>d', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F4>', '<cmd>ClangdSwitchSourceHeader<CR>', opts)
   end
+
   nvim_lsp['clangd'].setup {
    on_attach = on_attach,
    cmd = {
@@ -49,12 +50,3 @@ end
 
 EOF
 
-
-"----------------------
-" Completion options
-"----------------------
-" Set completeopt to have a better completion experience
-set completeopt=menuone,noinsert,noselect
-
-" Avoid showing message extra message when using completion
-set shortmess+=c
