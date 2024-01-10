@@ -23,7 +23,7 @@ return {
                     -- Can also be a function to return dynamic value.
                     -- If not provided, the path will be inferred by checking for
                     -- virtual envs in the local directory and for Pipenev/Poetry configs
-                    python = "~/env/bin/python",
+                    -- python = "~/env/bin/python",
                     -- !!EXPERIMENTAL!! Enable shelling out to `pytest` to discover test
                     -- instances for files containing a parametrize mark (default: false)
                     pytest_discover_instances = true,

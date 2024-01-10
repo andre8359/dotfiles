@@ -6,13 +6,6 @@ local config = function()
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local lspconfig = require("lspconfig")
 
-    local diagnostic_signs = { Error = " ", Warn = " ", Hint = "H", Info = "" }
-
-    for type, icon in pairs(diagnostic_signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
-
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
     local on_attach = function(client, bufnr)
@@ -28,6 +21,7 @@ local config = function()
         mapkey("<leader>n", "Lspsaga diagnostic_jump_prev", "n", opts) -- jump to prev diagnostic in buffer
         mapkey("<leader>m", "Lspsaga diagnostic_jump_next", "n", opts) -- jump to next diagnostic in buffer
         mapkey("K", "Lspsaga hover_doc", "n", opts) -- show documentation for what is under cursor
+        mapkey("<leader>o", "ClangdSwitchSourceHeader", "n", opts) -- switch between .h/.cpp
 
         if client.name == "pyright" then
             mapkey("<Leader>oi", "PyrightOrganizeImports", "n", opts)
@@ -63,20 +57,9 @@ local config = function()
     })
 
     -- python
-    lspconfig.pyright.setup({
+    lspconfig.jedi_language_server.setup({
         capabilities = capabilities,
         on_attach = on_attach,
-        settings = {
-            pyright = {
-                disableOrganizeImports = false,
-                analysis = {
-                    useLibraryCodeForTypes = true,
-                    autoSearchPaths = true,
-                    diagnosticMode = "workspace",
-                    autoImportCompletions = true,
-                },
-            },
-        },
     })
 
     -- bash
@@ -116,7 +99,7 @@ local config = function()
     local shellcheck = require("efmls-configs.linters.shellcheck")
     local clangformat = require("efmls-configs.formatters.clang_format")
     local mypy = require("efmls-configs.linters.mypy")
-    local ruff = require("efmls-configs.formatters.ruff")
+    local autopep8 = require("efmls-configs.formatters.autopep8")
     local prettier_d = require("efmls-configs.formatters.prettier_d")
     local fixjson = require("efmls-configs.formatters.fixjson")
     local eslint_d = require("efmls-configs.linters.eslint_d")
@@ -150,7 +133,7 @@ local config = function()
         settings = {
             languages = {
                 lua = { luacheck, stylua },
-                python = { mypy, ruff },
+                python = { mypy, autopep8 },
                 json = { eslint_d, fixjson },
                 jsonc = { eslint_d, fixjson },
                 sh = { shellcheck, shfmt },
